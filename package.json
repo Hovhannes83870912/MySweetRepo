@@ -1,0 +1,23 @@
+{
+  "name": "mysweetrepo",
+  "version": "1.0.0",
+  "description": "This game is about something",
+  "main": "LivingCreature.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hovhannes83870912/MySweetRepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hovhannes83870912/MySweetRepo/issues"
+  },
+  "homepage": "https://github.com/Hovhannes83870912/MySweetRepo#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
