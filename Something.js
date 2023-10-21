@@ -1,4 +1,6 @@
-class Lie extends LivingCreature {
+var LivingCreature = require("./LivingCreature")
+let random = require("./random");
+module.exports = class Lie extends LivingCreature {
     constructor(x, y) {
         super(x, y);
         this.energy = 48

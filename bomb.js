@@ -1,7 +1,8 @@
-class Bomb {
+let random = require("./random");
+module.exports = class Bomb {
     constructor(x, y) {
         this.time = 0
-        this.x = x
+        this.x = x  
         this.y = y
     }
     getNewCoordinates() {
