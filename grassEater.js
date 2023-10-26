@@ -33,6 +33,7 @@ module.exports = class GrassEater extends LivingCreature {
             var grass = new GrassEater(newX, newY);
             grassEaterArr.push(grass);
             this.energy = 8;
+            grassEatersStat++
         }
     }
 
@@ -63,7 +64,16 @@ module.exports = class GrassEater extends LivingCreature {
             matrix[this.y][this.x] = 0;
             this.x = newX
             this.y = newY
-            if (this.energy > 18) {
+            if (this.energy > 36 && Str == "Dzmer") {
+                this.mul()
+            }
+            if(this.energy > 18 && Str == "Amar"){
+                this.mul()
+            }
+            if(this.energy > 22 && Str == "Garun"){
+                this.mul()
+            }
+            if(this.energy > 28 && Str == "Ashun"){
                 this.mul()
             }
             for (var i in grasses) {

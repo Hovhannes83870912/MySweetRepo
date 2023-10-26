@@ -13,6 +13,7 @@ module.exports = class Grass extends LivingCreature {
             var newGrass = new Grass(newX, newY);
             grasses.push(newGrass);
             this.multiply = 0;
+            grassStat++
         }
     }
 }

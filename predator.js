@@ -34,6 +34,7 @@ chooseCell(character) {
       PredatorArr.push(pre);
 
       this.energy = 8;
+      PredatorsStat++
     }
   }
   eat() {
@@ -67,7 +68,16 @@ chooseCell(character) {
       this.x = x;
       this.y = y
 
-      if (this.energy > 12) {
+      if (this.energy > 36 && Str == "Dzmer") {
+        this.mul()
+      }
+      else if(this.energy > 18 && Str == "Amar"){
+        this.mul()
+      }
+      else if(this.energy > 22 && Str == "Garun"){
+        this.mul()
+      }
+      else if(this.energy > 28 && Str == "Ashun"){
         this.mul()
       }
     } else {

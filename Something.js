@@ -3,7 +3,7 @@ let random = require("./random");
 module.exports = class Lie extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.energy = 48
+        this.energy = 100
         this.multiplay = 0
     }
     getNewCoordinates() {
@@ -46,7 +46,8 @@ module.exports = class Lie extends LivingCreature {
 
             var newSomething = new Lie(newX, newY);
             Something.push(newSomething);
-            this.energy = 16;
+            this.energy = 100;
+            SomethingsStat++
         }
     }
     die(Y, X) {

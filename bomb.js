@@ -33,7 +33,6 @@ module.exports = class Bomb {
     }
     fall() {
         this.time++
-        console.log(this.time)
         if (this.time == 5) {
             let x = Math.floor(random(matrix.length));
             let y = Math.floor(random(matrix.length));
