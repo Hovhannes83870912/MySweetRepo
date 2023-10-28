@@ -3,7 +3,13 @@ let random = require("./random");
 module.exports = class Predator extends LivingCreature {
   constructor(x, y) {
     super(x, y);
-    this.energy = 2;
+    this.gender = random(gen)
+    if(this.gender == "male"){
+      this.energy = 5
+    }
+    else{
+      this.energy = 3
+    }
 }
 getNewCoordinates() {
     this.directions = [
@@ -32,8 +38,13 @@ chooseCell(character) {
       let pre = new Predator(x, y);
       matrix[y][x] = 5;
       PredatorArr.push(pre);
-
-      this.energy = 8;
+      this.gender = random(gen)
+      if(this.gender == "male"){
+        this.energy = 5
+      }
+      else{
+        this.energy = 3
+      }
       PredatorsStat++
     }
   }
@@ -52,12 +63,10 @@ chooseCell(character) {
         if (grasses[i].x == x && grasses[i].y == y) {
           grasses.splice(i, 1)
         }
-        else {
-          for (let i = 0; i < grassEaterArr.length; i++) {
-            if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
+      }
+        for (let i in grassEaterArr) {
+        if (grasses[i].x == x && grasses[i].y == y) {
               grassEaterArr.splice(i, 1)
-            }
-          }
         }
       }
 
@@ -68,23 +77,40 @@ chooseCell(character) {
       this.x = x;
       this.y = y
 
-      if (this.energy > 36 && Str == "Dzmer") {
-        this.mul()
-      }
-      else if(this.energy > 18 && Str == "Amar"){
-        this.mul()
-      }
-      else if(this.energy > 22 && Str == "Garun"){
-        this.mul()
-      }
-      else if(this.energy > 28 && Str == "Ashun"){
-        this.mul()
-      }
+      if(this.gender == "male"){
+        if (this.energy > 32 && Str == "Dzmer") {
+           this.mul()
+        }
+        if(this.energy > 12 && Str == "Amar"){
+           this.mul()
+        }
+        if(this.energy > 18 && Str == "Garun"){
+           this.mul()
+        }
+        if(this.energy > 24 && Str == "Ashun"){
+           this.mul()
+        }
+       }
+       else{
+           if (this.energy > 38 && Str == "Dzmer") {
+              this.mul()
+           }
+           if(this.energy > 20 && Str == "Amar"){
+              this.mul()
+           }
+           if(this.energy > 26 && Str == "Garun"){
+              this.mul()
+           }
+           if(this.energy > 32 && Str == "Ashun"){
+              this.mul()
+           }
+       }
     } else {
       this.move()
     }
   }
   move() {
+    console.log("this.energy" + this.energy)  
     let found = this.chooseCell(0);
     let exact = random(found)
 

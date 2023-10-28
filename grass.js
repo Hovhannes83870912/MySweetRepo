@@ -5,7 +5,6 @@ module.exports = class Grass extends LivingCreature {
         this.multiply++;
         var emptyCells = this.chooseCell(0);
         var chooseObject = random(emptyCells);
-        console.log(emptyCells, chooseObject);
         if (chooseObject && this.multiply >= 1) {
             var newX = chooseObject[0];
             var newY = chooseObject[1];

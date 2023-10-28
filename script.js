@@ -10,7 +10,7 @@ var pP = document.getElementById("Predator");
 var pGE = document.getElementById("GrassEater");
 var pS = document.getElementById("Something");
 function setup() {
-    frameRate(15);
+    frameRate(30);
     createCanvas(n * side, m * side)
     background('#acacac');
 }
@@ -39,7 +39,6 @@ socket.on("Stats", (grassStat,grassEatersStat,PredatorsStat,SomethingStat) =>{
     pP.innerText = "Այս խաղի ընթացքում ծնվել է "+ PredatorsStat + " Predator"
     pS.innerText = "Այս խաղի ընթացքում ծնվել է "+ SomethingStat + " Something"
 })
-("Stats", grassStat,grassEatersStat,PredatorsStat,SomethingStat)
 
 function draw(m) {
     matrix = m

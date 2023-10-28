@@ -32,8 +32,6 @@ module.exports = class Bomb {
         return found;
     }
     fall() {
-        this.time++
-        if (this.time == 5) {
             let x = Math.floor(random(matrix.length));
             let y = Math.floor(random(matrix.length));
             matrix[x][y] = 8
@@ -41,11 +39,7 @@ module.exports = class Bomb {
             this.y = y
             this.explore()
             this.hide()
-            this.time = 0
-        }
-        else if (this.time == 1) {
             this.hideAfterKilling()
-        }
     }
     explore() {
         var diametr = this.chooseCell()

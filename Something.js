@@ -47,7 +47,7 @@ module.exports = class Lie extends LivingCreature {
             var newSomething = new Lie(newX, newY);
             Something.push(newSomething);
             this.energy = 100;
-            SomethingsStat++
+            SomethingStat++
         }
     }
     die(Y, X) {

@@ -23,11 +23,15 @@ var Bomb = require('./bomb')
 let random = require("./random");
 
 matrix = [];
+snowManArr = [];
 grasses = [];
 grassEaterArr = [];
 Something = [];
 PredatorArr = [];
 BombArr = [];
+rabbitArr = []
+
+gen = ["male", "female"]
 weather = ["Garun", "Amar", "Ashun", "Dzmer"]
 
 grassStat = 0
@@ -35,9 +39,18 @@ grassEatersStat = 0
 PredatorsStat = 0
 SomethingStat = 0
 
-matrixGenerator(30, 10, 0, 0, 0);
+matrixGenerator(25, 2, 0, 0, 0);
+io.on('connection', function (socket) {
+    socket.on("send message", function (val) {
+        val = "ok"
+        BombArr[0].fall();
+    });
+});
+
 setInterval(changeWeather, 5000);
-setInterval(playGame, 250);
+setInterval(playGame, 1000);
+
+
 
 
 function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount, predatorCount) {
@@ -89,7 +102,7 @@ for (var y = 0; y < matrix.length; y++) {
         else if (matrix[y][x] == 5) {
             let newPredator = new Predator(x, y);
             PredatorArr.push(newPredator)
-            SomethingsStat++
+            SomethingStat++
         }
     }
 }
@@ -98,6 +111,9 @@ var bomb = new Bomb(matrix.length + 1, matrix.length + 1)
 BombArr.push(bomb)
 
 function playGame() {
+    main();
+    io.emit("Stats", grassStat,grassEatersStat,PredatorsStat,SomethingStat)
+    io.emit("Matrix", matrix)
     for (let i in grasses) {
         grasses[i].mul();
     }
@@ -110,18 +126,6 @@ function playGame() {
     for (let i in PredatorArr) {
         PredatorArr[i].eat();
     }
-    io.on('connection', function (socket) {
-        socket.on("send message", function (data) {
-            if(data){
-                for (let i in BombArr) {
-                    BombArr[i].fall();
-                }
-            }
-        });
-    });
-    main();
-    io.emit("Stats", grassStat,grassEatersStat,PredatorsStat,SomethingStat)
-    io.emit("Matrix", matrix)
 }
 count = 0
 
@@ -134,7 +138,7 @@ function changeWeather() {
         count = 0
     }
     io.emit("WEATHER", str)
-    GlobalString(str)
+    GlobalString(str)   
 }
 
 function GlobalString(s) {
@@ -152,4 +156,3 @@ function main() {
 function GlobalString(s) {
     Str = s
 }
-
