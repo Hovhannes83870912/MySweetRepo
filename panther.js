@@ -1,12 +1,12 @@
-// Պռեդատորը ուտում է խոտակեր և նապաստակներ։ Բազմանում է։
+// Պանտեռան կարողանում է ուտել խոտակերներին և նապաստակներին։ Պանտեռան շարժվում է միանգամից 3 վանդակ բայց սրա պատճառով կարող է շուտ էներգազրկվել։
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
-module.exports = class Predator extends LivingCreature {
+module.exports = class Panther extends LivingCreature {
   constructor(x, y) {
     super(x, y);
     this.gender = random(gen)
     if(this.gender == "male"){
-      this.energy = 5
+      this.energy = 6
     }
     else{
       this.energy = 3
@@ -36,20 +36,22 @@ chooseCell(character) {
       let x = exact[0];
       let y = exact[1];
 
-      let pre = new Predator(x, y);
-      matrix[y][x] = 5;
-      PredatorArr.push(pre);
+      let pan = new Panther(x, y);
+      matrix[y][x] = 12;
+      pantherArr.push(pan);
       this.gender = random(gen)
       if(this.gender == "male"){
-        this.energy = 5
+        this.energy = 6
       }
       else{
         this.energy = 3
       }
-      PredatorsStat++
+      pantherStat++
     }
   }
   eat() {
+    for (let index = 0; index <= 2; index++) {
+
     let found1 = this.chooseCell(1);
     let found2 = this.chooseCell(2);
     let found3 = this.chooseCell(11);
@@ -80,7 +82,7 @@ chooseCell(character) {
       }
 
 
-      matrix[y][x] = 5
+      matrix[y][x] = 12
       matrix[this.y][this.x] = 0
 
       this.x = x;
@@ -116,7 +118,19 @@ chooseCell(character) {
        }
     } else {
       this.move()
+      if (this.energy < 0) {
+        this.die()
+        break
+      }
+      else {
+      this.energy--
+      if (this.energy < 0) {
+        this.die()
+        break
+      }
     }
+    }
+  }
   }
   move() {
     console.log("this.energy" + this.energy)  
@@ -127,7 +141,7 @@ chooseCell(character) {
       let x = exact[0];
       let y = exact[1];
 
-      matrix[y][x] = 5
+      matrix[y][x] = 12
       matrix[this.y][this.x] = 0
 
       this.x = x;
@@ -135,20 +149,12 @@ chooseCell(character) {
 
       this.energy--
 
-      if (this.energy < 0) {
-        this.die()
-      }
-    } else {
-      this.energy--
-      if (this.energy < 0) {
-        this.die()
-      }
     }
   }
   die() {
-    for (let i = 0; i < PredatorArr.length; i++) {
-      if (PredatorArr[i].x == this.x && PredatorArr[i].y == this.y) {
-        PredatorArr.splice(i, 1)
+    for (let i = 0; i < pantherArr.length; i++) {
+      if (pantherArr[i].x == this.x && pantherArr[i].y == this.y) {
+        pantherArr.splice(i, 1)
       }
     }
     matrix[this.y][this.x] = 0

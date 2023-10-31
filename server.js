@@ -19,6 +19,8 @@ var GrassEater = require('./grassEater')
 var bomb = require('./bomb')
 var Predator = require('./predator')
 var Lie = require('./Something')
+var Rabbit = require('./rabbit')
+var Panther = require('./panther')
 var Bomb = require('./bomb')
 let random = require("./random");
 
@@ -29,7 +31,9 @@ grassEaterArr = [];
 Something = [];
 PredatorArr = [];
 BombArr = [];
+pantherArr = [];
 rabbitArr = []
+
 
 gen = ["male", "female"]
 weather = ["Garun", "Amar", "Ashun", "Dzmer"]
@@ -38,8 +42,11 @@ grassStat = 0
 grassEatersStat = 0
 PredatorsStat = 0
 SomethingStat = 0
+RabbitStat = 0
+pantherStat = 0
 
-matrixGenerator(25, 2, 0, 0, 0);
+matrixGenerator(25, 10, 0, 15, 0, 0, 8);
+
 io.on('connection', function (socket) {
     socket.on("send message", function (val) {
         val = "ok"
@@ -47,13 +54,13 @@ io.on('connection', function (socket) {
     });
 });
 
-setInterval(changeWeather, 5000);
+setInterval(changeWeather, 8000);
 setInterval(playGame, 1000);
 
 
 
 
-function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount, predatorCount) {
+function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount, predatorCount,rabbitCount,pantherCount) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = []
         for (let o = 0; o < matrixSize; o++) {
@@ -80,6 +87,16 @@ function matrixGenerator(matrixSize, grassCount, grassEaterCount, somethingCount
         let y = Math.floor(random(matrixSize));
         matrix[y][x] = 5;
     }
+    for (let i = 0; i < rabbitCount; i++) {
+        let x = Math.floor(random(matrixSize));
+        let y = Math.floor(random(matrixSize));
+        matrix[y][x] = 11;
+    }
+    for (let i = 0; i < pantherCount; i++) {
+        let x = Math.floor(random(matrixSize));
+        let y = Math.floor(random(matrixSize));
+        matrix[y][x] = 12;
+    }
 }
 
 for (var y = 0; y < matrix.length; y++) {
@@ -97,12 +114,24 @@ for (var y = 0; y < matrix.length; y++) {
         else if (matrix[y][x] == 3) {
             let newSomething = new Lie(x, y);
             Something.push(newSomething)
-            PredatorsStat++
+            SomethingStat++
         }
         else if (matrix[y][x] == 5) {
             let newPredator = new Predator(x, y);
             PredatorArr.push(newPredator)
-            SomethingStat++
+            PredatorsStat++
+        }
+        else if (matrix[y][x] == 11) {
+            let newRabbit = new Rabbit(x, y);
+            rabbitArr.push(newRabbit)
+            RabbitStat++
+
+        }
+        else if (matrix[y][x] == 12) {
+            let newPanther = new Panther(x, y);
+            pantherArr.push(newPanther)
+            pantherStat++
+
         }
     }
 }
@@ -112,7 +141,7 @@ BombArr.push(bomb)
 
 function playGame() {
     main();
-    io.emit("Stats", grassStat,grassEatersStat,PredatorsStat,SomethingStat)
+    io.emit("Stats", grassStat,grassEatersStat,PredatorsStat,SomethingStat,RabbitStat,pantherStat)
     io.emit("Matrix", matrix)
     for (let i in grasses) {
         grasses[i].mul();
@@ -120,12 +149,18 @@ function playGame() {
     for (let i in grassEaterArr) {
         grassEaterArr[i].eat();
     }
+    for (let i in rabbitArr) {
+        rabbitArr[i].eat();
+    }
     for (let i in Something) {
         Something[i].move();
     }
     for (let i in PredatorArr) {
         PredatorArr[i].eat();
-    }
+    } 
+    for (let i in pantherArr) {
+        pantherArr[i].eat();
+    } 
 }
 count = 0
 
@@ -150,7 +185,9 @@ function main() {
         grassCount: grassStat,
         grassEatersCount: grassEatersStat,
         PredatorsCount: PredatorsStat,
-        SomethingCount: SomethingStat}));
+        SomethingCount: SomethingStat,
+        RabbitCount: RabbitStat,
+        PantherCount: pantherStat }));
 }
 
 function GlobalString(s) {

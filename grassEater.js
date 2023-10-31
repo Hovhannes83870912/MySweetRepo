@@ -1,3 +1,4 @@
+// Խոտակերը կարողանում է ուտել խոտ և բազմանալ
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
 module.exports = class GrassEater extends LivingCreature {

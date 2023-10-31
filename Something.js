@@ -1,3 +1,4 @@
+// Կեղծիքը ձևանում է սովորական խոտ և պետք պահին կարող է ուտել Պռեդատորին և Պանտեռային։ 
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
 module.exports = class Lie extends LivingCreature {
@@ -63,7 +64,10 @@ module.exports = class Lie extends LivingCreature {
         this.energy = this.energy - 1
         console.log(this.energy)
         var emptyCells = this.ChooseCell(5);
-        var newCell = random(emptyCells);
+        var emptyCells2 = this.ChooseCell(12);
+        var emptyCells3 = [emptyCells,  emptyCells2]
+        var emptyCells4 = random(emptyCells3);
+        var newCell = random(emptyCells4);
         if (this.energy > 0) {
             if (emptyCells == 0) {
             }
@@ -86,6 +90,13 @@ module.exports = class Lie extends LivingCreature {
         for (var i in PredatorArr) {
             if (newX == PredatorArr[i].x && newY == PredatorArr[i].y) {
                 PredatorArr.splice(i, 1);
+                this.energy = 17
+                break;
+            }
+        }
+        for (var i in pantherArr) {
+            if (newX == pantherArr[i].x && newY == pantherArr[i].y) {
+                pantherArr.splice(i, 1);
                 this.energy = 17
                 break;
             }

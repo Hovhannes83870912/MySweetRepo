@@ -1,3 +1,4 @@
+// Խոտը հասարակ կերպար է ում նպատակը բազմանալն է
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
 module.exports = class Grass extends LivingCreature {

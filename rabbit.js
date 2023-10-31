@@ -1,6 +1,7 @@
+// Նապաստակը սնվումն է խոտով և կարող է ցատկել 1 վանդակ
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
-module.exports = class GrassEater extends LivingCreature {
+module.exports = class rabbit extends LivingCreature {
     constructor(x, y, index) {
         super(x, y, index);
         this.gender = random(gen)
@@ -34,10 +35,10 @@ module.exports = class GrassEater extends LivingCreature {
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 2;
+            matrix[newY][newX] = 11;
 
-            var grass = new GrassEater(newX, newY);
-            grassEaterArr.push(grass);
+            var grass = new rabbit(newX, newY);
+            rabbitArr.push(grass);
             this.gender = random(gen)
             if(this.gender == "male"){
                 this.energy = 8
@@ -45,7 +46,7 @@ module.exports = class GrassEater extends LivingCreature {
             else{
                 this.energy = 6
             }
-            grassEatersStat++
+            RabbitStat++
         }
     }
 
@@ -118,9 +119,9 @@ module.exports = class GrassEater extends LivingCreature {
 
     die() {
         matrix[this.y][this.x] = 0;
-        for (var i in grassEaterArr) {
-            if (this.x == grassEaterArr[i].x && this.y == grassEaterArr[i].y) {
-                grassEaterArr.splice(i, 1);
+        for (var i in rabbitArr) {
+            if (this.x == rabbitArr[i].x && this.y == rabbitArr[i].y) {
+                rabbitArr.splice(i, 1);
                 break;
             }
         }

@@ -9,6 +9,8 @@ var pG = document.getElementById("Grass");
 var pP = document.getElementById("Predator");
 var pGE = document.getElementById("GrassEater");
 var pS = document.getElementById("Something");
+var pR = document.getElementById("Rabbit");
+var pPan = document.getElementById("Panther");
 function setup() {
     frameRate(30);
     createCanvas(n * side, m * side)
@@ -33,11 +35,13 @@ socket.on("WEATHER", (str) =>{
 
 
 
-socket.on("Stats", (grassStat,grassEatersStat,PredatorsStat,SomethingStat) =>{
+socket.on("Stats", (grassStat,grassEatersStat,PredatorsStat,SomethingStat,RabbitStat, pantherStat) =>{
     pG.innerText = "Այս խաղի ընթացքում ծնվել է " + grassStat + " Grass"
     pGE.innerText = "Այս խաղի ընթացքում ծնվել է "+ grassEatersStat + " GrassEater"
     pP.innerText = "Այս խաղի ընթացքում ծնվել է "+ PredatorsStat + " Predator"
     pS.innerText = "Այս խաղի ընթացքում ծնվել է "+ SomethingStat + " Something"
+    pR.innerText = "Այս խաղի ընթացքում ծնվել է "+ RabbitStat + " Rabbit"
+    pPan.innerText = "Այս խաղի ընթացքում ծնվել է "+ pantherStat + " Panther"
 })
 
 function draw(m) {
@@ -88,8 +92,17 @@ function draw(m) {
                 fill("#acacac");
                 rect(x * side, y * side, side, side);
             }
+            else if (matrix[y][x] == 11) {
+                fill("brown");
+                rect(x * side, y * side, side, side);
+            }
+            else if (matrix[y][x] == 12) {
+                fill("blue");
+                rect(x * side, y * side, side, side);
+            }
         }
     }
 }
 
 
+// Պ
