@@ -1,4 +1,4 @@
-// Պռեդատորը ուտում է խոտակեր և նապաստակներ։ Բազմանում է։
+// Պռեդատորը ուտում է խոտակեր և նապաստակներ և պանտեռաներ։ Բազմանում է։
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
 module.exports = class Predator extends LivingCreature {
@@ -53,7 +53,8 @@ chooseCell(character) {
     let found1 = this.chooseCell(1);
     let found2 = this.chooseCell(2);
     let found3 = this.chooseCell(11);
-    let found = [found1, found2, found3]
+    let found4 = this.chooseCell(12);
+    let found = [found1, found2, found3, found4]
     let randomfound = random(found);
     let exact = random(randomfound)
     if (exact) {
@@ -76,6 +77,12 @@ chooseCell(character) {
         if (rabbitArr[i].x == x && rabbitArr[i].y == y) {
             rabbitArr.splice(i, 1)
             console.log("i ate a rabbit");
+        }
+      }
+      for (let i in pantherArr) {
+        if (pantherArr[i].x == x && pantherArr[i].y == y) {
+          pantherArr.splice(i, 1)
+            console.log("i ate a panther");
         }
       }
 

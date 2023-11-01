@@ -1,4 +1,4 @@
-// Կեղծիքը ձևանում է սովորական խոտ և պետք պահին կարող է ուտել Պռեդատորին և Պանտեռային։ 
+// Կեղծիքը ձևանում է սովորական խոտ և պետք պահին կարող է ուտել Պռեդատորին։ 
 var LivingCreature = require("./LivingCreature")
 let random = require("./random");
 module.exports = class Lie extends LivingCreature {
@@ -62,12 +62,8 @@ module.exports = class Lie extends LivingCreature {
     }
     move() {
         this.energy = this.energy - 1
-        console.log(this.energy)
         var emptyCells = this.ChooseCell(5);
-        var emptyCells2 = this.ChooseCell(12);
-        var emptyCells3 = [emptyCells,  emptyCells2]
-        var emptyCells4 = random(emptyCells3);
-        var newCell = random(emptyCells4);
+        var newCell = random(emptyCells);
         if (this.energy > 0) {
             if (emptyCells == 0) {
             }

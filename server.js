@@ -45,7 +45,7 @@ SomethingStat = 0
 RabbitStat = 0
 pantherStat = 0
 
-matrixGenerator(25, 10, 0, 15, 0, 0, 8);
+matrixGenerator(50, 10, 10, 10, 10, 10, 10);
 
 io.on('connection', function (socket) {
     socket.on("send message", function (val) {
